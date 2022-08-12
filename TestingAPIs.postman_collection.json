@@ -1,0 +1,432 @@
+{
+	"info": {
+		"_postman_id": "23c5bcd8-64f6-4304-92f3-a3a740ef50a0",
+		"name": "TestingAPIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GETs",
+			"item": [
+				{
+					"name": "Get Happy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '200'\", pm.response.code, 200);\r",
+									"valueTest(\"The response should be a 'JSON'\", typeof(jsonData), 'object');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Happy Configured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '200'\", pm.response.code, 200);\r",
+									"valueTest(\"The response should be a 'JSON'\", typeof(jsonData), 'object');\r",
+									"valueTest(\"The number of record in the response should be: '6'\", jsonData.data.length, 6);\r",
+									"valueTest(\"The page number should be: '\" + pm.variables.get(\"page_number\") + \"'\", jsonData.page.toString(), pm.variables.get(\"page_number\"));\r",
+									"valueTest(\"The value of key 'first_name' should be: 'Michael'\", jsonData.data[0].first_name, \"Michael\");\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"page_number\", \"2\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users?page={{page_number}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{page_number}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Negative1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '404'\", pm.response.code, 404);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/abcd/users?page=1",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"abcd",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Negative2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '403'\", pm.response.code, 403);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.com/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"com"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Negative3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '200'\", pm.response.code, 200);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?pagenumber=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "pagenumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POSTs",
+			"item": [
+				{
+					"name": "Post Happy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '201'\", pm.response.code, 201);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Don\",\r\n    \"job\": \"SSE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Happy Configured",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '201'\", pm.response.code, 201);\r",
+									"valueTest(\"The response should be a 'JSON'\", typeof(jsonData), 'object');\r",
+									"valueTest(\"The value of key 'name' should be: '\" + pm.variables.get(\"name\") + \"'\", jsonData.name, pm.variables.get(\"name\"));\r",
+									"valueTest(\"The value of key 'job' should be: '\" + pm.variables.get(\"job\") + \"'\", jsonData.job, pm.variables.get(\"job\"));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"name\", \"Don\");\r",
+									"pm.variables.set(\"job\", \"SSE\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"job\": \"{{job}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Negative1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"function valueTest(testCase, actual, expected) {\r",
+									"    pm.test(testCase, function () {\r",
+									"        pm.expect(expected).to.equal(actual);\r",
+									"    });            \r",
+									"}\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"valueTest(\"Expecting status code to be '404'\", pm.response.code, 404);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Don\",\r\n    \"age\": \"10\",\r\n    \"place\": \"Pulpally\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/abcd/users",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"abcd",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
